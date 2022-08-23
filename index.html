@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" type="image/jpg" href="resources/img/syringe_favicon.png" />
+    <title>CoWinner</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="vendors/css/intlTelInput.css">
+    <link rel="stylesheet" href="resources/css/style.css">
+</head>
+
+<body>
+    <div class='main-layout'>
+        <div class='heading'>
+            <!--<img class='logo' alt='logo' src='resources/img/icon.png'>-->
+            <img class='logo' alt='logo' src='resources/img/syringe.png'>
+            <h1>CoWinner</h1>
+        </div>
+
+        <div class='description'>
+            <h5>Win your way through the pandemic</h5>
+            <p>Search for vaccination slots</p>
+        </div>
+        <form id='form-location'>
+            <div class='selector-buttons'>
+                <input class="btn-search btn-search--selected" name='districtButton' type="button" value="District" id='button-district'>
+                <input class="btn-search" name='pincodeButton' type="button" id='button-pincode' value="Pincode">
+            </div>
+            <div class='form-inputs'>
+                <select name='state' id='state-dropdown' class='dropdown-search'>
+                        
+                    </select>
+                <select name='district' id='district-dropdown' class='dropdown-search'>
+                        <option value="" class='option-placeholder' disabled selected>Select region</option>
+                    </select>
+                <input type='number' placeholder="Pincode" value='' name='pincode' id='textbox-pincode' class='textbox-remove'>
+            </div>
+            <input type='submit' class='btn--submit' value='Search slots'>
+        </form>
+        <div id="recaptcha-container"></div>
+        <div class='or-seperator-container'>
+            <span class='line'></span>
+            <!-- <p class='or_text'>OR</p> -->
+            <span class='line'></span>
+        </div>
+        <!-- <form id='authentication-form' class='form-inputs'>
+            <p>Sign up for instant alerts on WhatsApp</p>
+
+            <input type="text" placeholder="Name" class="form-input" id="name" name="name" required>
+            <input type="email" placeholder="Email" class="form-input" id="email" name="email" required>
+            <input type="tel" placeholder="Whatsapp Number" class="form-input" id="phone_number" name="phoneNumber" required="">
+
+            <select name='region' id='region-dropdown' class='dropdown-search'>
+                <option value="" class='option-placeholder' disabled selected>Select region</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Coimbatore">Coimbatore</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Gurgaon">Gurgaon</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Jodhpur">Jodhpur</option>
+                <option value="Kanpur">Kanpur</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Madurai">Madurai</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Noida">Noida</option>
+                <option value="Patna">Patna</option>
+                <option value="Pune">Pune</option>
+                <option value="Surat">Surat</option>
+                <option value="Visakhapatnam">Visakhapatnam</option>
+            </select>
+            <input type="submit" class='btn--submit' id="notification--submit" value="Submit">
+
+
+        </form> -->
+        <form id='otp-form' class='form-inputs'>
+            <input type="number" placeholder="Enter OTP" class="form-input" id="otp" name="otp">
+            <input type="submit" class='btn--submit' id="otp--submit" value="Submit">
+        </form>
+
+        <div class='confirmation-message'>
+            <p> Almost done! </p>
+            <p>Please send us a Whatsapp text using the QR code or WA button to get started.</p>
+            <div class='wa-links'>
+                <div class='qr_container'>
+                    <img class='qr_image' alt='QR code' src='resources/img/qr_code.png'>
+                    <p>Scan QR</p>
+                </div>
+                <!-- <div class='wa_link_container'>
+                    <a href="https://wa.link/mhq8yd">
+                        <img class='wa_image' alt='Whatsapp Image' src='resources/img/whatsapp.png'>
+                    </a>
+                    <p>Redirect to WhatsApp</p>
+                </div> -->
+            </div>
+        </div>
+        <div class='footer'>
+            <!-- <p>Powered by <a href="https://www.wati.io/">WATI</a></p> -->
+            <p>Created by <a href="https://www.linkedin.com/in/punith-hegde/">Punith B Hegde</a></p>
+            <p>You may reach us at hegdepunith17@gmail.com</p>
+            
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-database.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDoWD4j6BMxym-I_ZvLVHlPqg_CK0iZueE",
+            authDomain: "cowinner-20464.firebaseapp.com",
+            databaseURL: "https://cowinner-20464-default-rtdb.asia-southeast1.firebasedatabase.app/",
+            projectId: "cowinner-20464",
+            storageBucket: "cowinner-20464.appspot.com",
+            messagingSenderId: "213466131461",
+            appId: "1:213466131461:web:1b17684cadcc3cfb9ec06c",
+            measurementId: "G-LP2KVREQBS"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+    <script src="resources/js/requests.js"></script>
+    <script src="resources/js/functions.js"></script>
+    <script src="resources/js/app.js"></script>
+    <script src="resources/js/notification-functions.js"></script>
+    <script src="resources/js/notification-app.js"></script>
+    <script>
+        const phoneInputField = document.querySelector("#phone_number");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            preferredCountries: ["in"],
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+    </script>
+</body>
+
+</html>
